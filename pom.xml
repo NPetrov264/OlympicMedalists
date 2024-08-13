@@ -8,7 +8,7 @@
 		<version>3.3.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.npetrov</groupId>
 	<artifactId>OlympicMedalists</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>OlympicMedalistsStatistics</name>
