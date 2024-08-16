@@ -1,0 +1,50 @@
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import { Layout } from "../components/Layout";
+
+export default function Home() {
+
+    const [events, setEvents] = useState([]);
+
+    const getEvents = async () => {
+
+        try{
+          const response = await axios.get("http://localhost:8080/events/medalists");
+          console.log(response.data);
+          setEvents(response.data);
+        } catch(err) {
+          console.log(Error)
+        }
+    }
+
+    useEffect (() => {
+        getEvents();
+    }, [])
+
+    return (
+        <div className="container">
+            <div className="py-4">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">athleteName</th>
+                            <th scope="col">games</th>
+                            <th scope="col">medal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {events.map(event => (
+                            <tr key={event.id}>
+                                <th scope="row">{event.id}</th>
+                                <td>{event.athleteName}</td>
+                                <td>{event.games}</td>
+                                <td>{event.medal}</td>
+                            </tr>)
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+}
