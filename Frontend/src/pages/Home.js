@@ -24,7 +24,7 @@ export default function Home() {
     return (
         <div className="container">
             <div className="py-4">
-                <table className="table">
+                <table className="table shadow">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -44,6 +44,7 @@ export default function Home() {
                         )}
                     </tbody>
                 </table>
+                <button className="btn btn-primary mx-2">View</button>
             </div>
         </div>
     )
