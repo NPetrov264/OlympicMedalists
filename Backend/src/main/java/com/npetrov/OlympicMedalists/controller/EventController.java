@@ -1,11 +1,17 @@
 package com.npetrov.OlympicMedalists.controller;
 
+import com.npetrov.OlympicMedalists.model.Athlete;
 import com.npetrov.OlympicMedalists.model.Event;
+import com.npetrov.OlympicMedalists.repository.AthleteRepository;
 import com.npetrov.OlympicMedalists.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -13,6 +19,8 @@ public class EventController {
 
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private AthleteRepository athleteRepository;
 
     @PostMapping("/event")
     Event newEvent(@RequestBody Event newEvent) {
@@ -23,9 +31,17 @@ public class EventController {
     List<Event> getAllEvents(){
         return eventRepository.findAll();
     }
-    @GetMapping("/events/medalists")
-    public List<Event> getAllWithMedals() {
-        return eventRepository.findAllWithMedals();
+
+    @GetMapping("/top-athletes/{country}")
+    public Page<Athlete> topAthletes(@PathVariable  String  country/*, @RequestParam int currentPage*/){
+        PageRequest pr = PageRequest.of(0, 20, Sort.by("medals").descending().and(Sort.by("goldMedals")));
+        return athleteRepository.findByCountryContaining(country, pr);
+    }
+
+    @GetMapping("/top-athletes")
+    public Page<Athlete> findTopAthletes() {
+        PageRequest pr = PageRequest.of(0, 20 , Sort.by("medals").descending().and(Sort.by("goldMedals")));
+        return athleteRepository.findAll(pr);
     }
 
 }

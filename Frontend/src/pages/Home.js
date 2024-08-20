@@ -9,7 +9,7 @@ export default function Home() {
     const getEvents = async () => {
 
         try{
-          const response = await axios.get("http://localhost:8080/events/medalists");
+          const response = await axios.get("http://localhost:8080/events");
           console.log(response.data);
           setEvents(response.data);
         } catch(err) {
