@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import api from "../api/axiosConfig"
 import { Layout } from "../components/Layout";
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
     const getEvents = async () => {
 
         try{
-          const response = await axios.get("http://localhost:8080/events");
+          const response = await api.get("/events");
           console.log(response.data);
           setEvents(response.data);
         } catch(err) {

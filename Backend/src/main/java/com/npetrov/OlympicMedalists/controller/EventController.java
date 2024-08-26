@@ -1,6 +1,5 @@
 package com.npetrov.OlympicMedalists.controller;
 
-import com.npetrov.OlympicMedalists.model.Athlete;
 import com.npetrov.OlympicMedalists.model.Event;
 import com.npetrov.OlympicMedalists.repository.AthleteRepository;
 import com.npetrov.OlympicMedalists.repository.EventRepository;
@@ -30,18 +29,6 @@ public class EventController {
     @GetMapping("/events")
     List<Event> getAllEvents(){
         return eventRepository.findAll();
-    }
-
-    @GetMapping("/top-athletes/{country}")
-    public Page<Athlete> topAthletes(@PathVariable  String  country/*, @RequestParam int currentPage*/){
-        PageRequest pr = PageRequest.of(0, 20, Sort.by("medals").descending().and(Sort.by("goldMedals")));
-        return athleteRepository.findByCountryContaining(country, pr);
-    }
-
-    @GetMapping("/top-athletes")
-    public Page<Athlete> findTopAthletes() {
-        PageRequest pr = PageRequest.of(0, 20 , Sort.by("medals").descending().and(Sort.by("goldMedals")));
-        return athleteRepository.findAll(pr);
     }
 
 }
