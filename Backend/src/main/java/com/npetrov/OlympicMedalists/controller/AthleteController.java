@@ -1,9 +1,7 @@
 package com.npetrov.OlympicMedalists.controller;
 
 import com.npetrov.OlympicMedalists.model.Athlete;
-import com.npetrov.OlympicMedalists.model.Event;
 import com.npetrov.OlympicMedalists.repository.AthleteRepository;
-import com.npetrov.OlympicMedalists.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

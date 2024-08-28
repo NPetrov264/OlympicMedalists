@@ -88,7 +88,7 @@ export default function TopAthletes() {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Find Country" aria-label="Search" />
+                            <input className="form-control me-2" type="search" placeholder="Find by Country" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
                         <div className="dropdown">
