@@ -20,7 +20,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     <MenuItem
       active={selected === title}
       style={{
-        color: colors.grey[900],
+        color: colors.grey[100],
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -88,7 +88,7 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="10px"
               >
-                <Typography variant="h3" color={colors.grey[900]}>Olympic stats</Typography>
+                <Typography variant="h3" color={colors.grey[100]}>Olympic stats</Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
@@ -123,7 +123,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[700]}
+              color={colors.grey[300]}
               sx={{ m: "15px 0 5px 6px" }}
             >
               By Country
@@ -153,7 +153,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[700]}
+              color={colors.grey[300]}
               sx={{ m: "15px 0 5px 10px" }}
             >
               By Athlete
