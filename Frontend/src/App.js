@@ -12,7 +12,8 @@ import Dashboard from './pages/dashboard';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './pages/Contact';
-import TopAthletes from './pages/TopAthletes';
+import TopAthletes from './pages/topAthletes/topAthletes';
+import TopAthletesOld from './pages/topAthletes/TopAthletesOld';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -34,7 +35,7 @@ function App() {
                   <Route path="/weight" element={<Weight/>}/>
                   <Route path="/height" element={<Height/>}/> */}
 
-                  {/* <Route exact path="/top-athletes" element={<TopAthletes/>}/> */}
+                  <Route path="/top-athletes-old" element={<TopAthletesOld/>}/>
                   <Route path="/top-athletes" element={<TopAthletes/>}/>
                   <Route exact path="/contact" element={<Contact/>}/>
                 </Routes>

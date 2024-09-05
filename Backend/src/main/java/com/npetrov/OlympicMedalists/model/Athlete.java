@@ -13,8 +13,8 @@ import lombok.Setter;
 @Table(name = "athletes")
 public class Athlete {
     @Id
-    @Column(name = "athleteId")
-    private Integer athleteId;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name ="noc")
     private String noc;
