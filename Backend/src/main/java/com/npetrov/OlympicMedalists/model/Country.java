@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "test")
+@Table(name = "countries")
 public class Country {
     @Id
     @Column(name = "noc")
@@ -19,6 +19,18 @@ public class Country {
     @Column(name ="country")
     private String country;
 
-    @Column(name ="medals")
-    private Integer medals;
+    @Column(name ="population")
+    private Integer population;
+
+    @Column(name ="goldMedals")
+    private Integer goldMedals;
+
+    @Column(name ="silverMedals")
+    private Integer silverMedals;
+
+    @Column(name ="bronzeMedals")
+    private Integer bronzeMedals;
+
+    @Column(name ="totalMedals")
+    private Integer totalMedals;
 }
