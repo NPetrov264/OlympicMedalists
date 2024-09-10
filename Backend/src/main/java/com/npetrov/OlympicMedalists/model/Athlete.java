@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Setter
 @Getter
@@ -19,8 +21,8 @@ public class Athlete {
     @Column(name ="noc")
     private String noc;
 
-    @Column(name ="country")
-    private String country;
+    @Column(name ="team")
+    private String team;
 
     @Column(name ="athleteName")
     private String athleteName;
@@ -51,5 +53,9 @@ public class Athlete {
 
     @Column(name ="bronzeMedals")
     private Integer bronzeMedals;
+
+//    @OneToMany(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "athleteId", referencedColumnName = "id")
+//    private List<Event> event;
 
 }

@@ -17,14 +17,6 @@ public class AthleteController {
     @Autowired
     private AthleteRepository athleteRepository;
 
-    @GetMapping("/top-athletes/{country}")
-    @ResponseBody
-    public Page<Athlete> topAthletes(@PathVariable  String  country, @RequestParam int currentPage){
-        PageRequest pr = PageRequest.of(currentPage, 20,
-                Sort.by("medals").descending().and(Sort.by("goldMedals").descending()).and(Sort.by("silverMedals").descending()));
-        return athleteRepository.findByCountryContainingAndMedalsGreaterThan(country, 0, pr);
-    }
-
     @GetMapping("/top-athletes/sports")
     @ResponseBody
     public List<String> findDistinctSports() {
@@ -49,15 +41,12 @@ public class AthleteController {
     @GetMapping("/top-athletes")
     @ResponseBody
     public List<Athlete> findTopAthletes(
-            @RequestParam(name="page", required=false,  defaultValue = "0") int currentPage,
             @RequestParam(name="sport", required=false,  defaultValue = "All") String sport
     ) {
-//        PageRequest pr = PageRequest.of(currentPage, 25,
-//                Sort.by("medals").descending().and(Sort.by("goldMedals").descending()).and(Sort.by("silverMedals").descending()));
         if (sport.equals("All")) {
             return athleteRepository.findAllByMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(0);
         } else {
-            return athleteRepository.findBySportAndMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(sport, 0);
+            return athleteRepository.findBySportContainingAndMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(sport, 0);
         }
     }
 }

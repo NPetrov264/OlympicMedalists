@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "test")
+@Table(name = "events")
 public class Event {
     @Id
     @Column(name ="id")
@@ -34,8 +34,8 @@ public class Event {
     @Column(name ="weight")
     private Integer weight;
 
-    @Column(name ="country")
-    private String country;
+    @Column(name ="team")
+    private String team;
 
     @Column(name ="noc")
     private String noc;

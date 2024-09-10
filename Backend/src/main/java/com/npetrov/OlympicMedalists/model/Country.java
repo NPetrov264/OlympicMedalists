@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Setter
 @Getter
@@ -33,4 +35,8 @@ public class Country {
 
     @Column(name ="totalMedals")
     private Integer totalMedals;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "noc", referencedColumnName = "noc")
+    private List<Event> event;
 }

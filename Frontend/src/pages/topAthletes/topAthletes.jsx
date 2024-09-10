@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/axiosConfig"
-import { Box, useTheme, Autocomplete, TextField } from "@mui/material";
+import { Box, useTheme, Autocomplete, TextField, Toolbar } from "@mui/material";
 import { tokens } from "../../theme";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Header from "../../components/Header";
 
 const TopAthletes = () => {
@@ -21,14 +21,14 @@ const TopAthletes = () => {
     },
     { field: "athleteName", headerName: "Name", flex: 1, cellClassName: "name-column--cell",},
     { field: "sex", headerName: "sex", flex: .04 },
-    { field: "noc", headerName: "noc", flex: .05 },
-    { field: "country", headerName: "country", flex: .2 },
+    { field: "noc", headerName: "noc", flex: .08 },
+    { field: "team", headerName: "team", flex: .2 },
     { field: "sport", headerName: "sport", flex: .2 },
-    { field: "timesParticipated", headerName: "times atended", flex: .2 },
-    { field: "goldMedals", headerName: "gold", flex: .1 },
-    { field: "silverMedals", headerName: "silver", flex: .1 },
-    { field: "bronzeMedals", headerName: "bronze", flex: .1 },
-    { field: "medals", headerName: "total medals", flex: .1, cellClassName: "medals-column--cell", },
+    { field: "timesParticipated", headerName: "times atended", flex: .12 },
+    { field: "goldMedals", headerName: "gold", flex: .06 },
+    { field: "silverMedals", headerName: "silver", flex: .06 },
+    { field: "bronzeMedals", headerName: "bronze", flex: .06 },
+    { field: "medals", headerName: "total medals", flex: .06, cellClassName: "medals-column--cell", },
   ];
 
   useEffect(() => {
@@ -124,17 +124,24 @@ const TopAthletes = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiButtonBase-root": {
+            color: `${colors.greenAccent[200]} !important`,
+          },
         }}
       >
         <DataGrid
           //paginationMode="server"
           rows={data}
           columns={columns}
-          density="compact"
+          //density="compact"
           pageSizeOptions={[25, 50, 100]}
           initialState={{
             ...data.initialState,
             pagination: { paginationModel: { pageSize: 25 } },
+            density: "compact",
+          }}
+          slots={{
+            toolbar: GridToolbar,
           }}
         />
       </Box>
