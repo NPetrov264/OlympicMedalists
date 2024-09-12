@@ -34,11 +34,15 @@ public class Event {
     @Column(name ="weight")
     private Integer weight;
 
+    @ManyToOne
+    @JoinColumn(name = "noc")
+    private Country noc;
+
+//    @Column(name ="noc")
+//    private String noc;
+
     @Column(name ="team")
     private String team;
-
-    @Column(name ="noc")
-    private String noc;
 
     @Column(name ="games")
     private String games;
