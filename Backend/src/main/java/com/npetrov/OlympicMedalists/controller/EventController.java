@@ -1,6 +1,7 @@
 package com.npetrov.OlympicMedalists.controller;
 
 import com.npetrov.OlympicMedalists.model.Event;
+import com.npetrov.OlympicMedalists.model.MedalCount;
 import com.npetrov.OlympicMedalists.model.Sport;
 import com.npetrov.OlympicMedalists.repository.EventRepository;
 import com.npetrov.OlympicMedalists.repository.SportRepository;
@@ -25,14 +26,22 @@ public class EventController {
         return sportRepository.findAllByOrderBySport();
     }
 
-    @PostMapping("/event")
-    Event newEvent(@RequestBody Event newEvent) {
-        return eventRepository.save(newEvent);
+    @GetMapping("/events")
+    List<Event> getFirst100(){
+        return eventRepository.findFirst100ByOrderById();
     }
 
-    @GetMapping("/events")
-    List<Event> getAllEvents(){
-        return eventRepository.findAll();
+    @GetMapping("/medals")
+    List<MedalCount> getAllEvents(
+        @RequestParam(name="startYear", required=false,  defaultValue = "1896") int startYear,
+        @RequestParam(name="endYear", required=false,  defaultValue = "2024") int endYear,
+        @RequestParam(name="season", required=false,  defaultValue = "Both") String season
+    ){
+        if(season.equals("Both")) {
+            return eventRepository.countTotalMedals(startYear, endYear);
+        } else {
+            return eventRepository.countTotalMedalsSeason(startYear, endYear, season);
+        }
     }
 
 }

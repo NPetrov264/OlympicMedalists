@@ -1,6 +1,7 @@
 package com.npetrov.OlympicMedalists.repository;
 
 import com.npetrov.OlympicMedalists.model.Event;
+import com.npetrov.OlympicMedalists.model.MedalCount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,10 +9,38 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    @Query("select test from Event test where test.medal != 'NA'")
-    List<Event> findAllWithMedals();
+    List<Event> findFirst100ByOrderById();
 
-    @Query(value = "SELECT DISTINCT noc, country, count(IF(medal = 'Gold', 1, NULL)) AS goldMedals, count(IF(medal = 'Silver', 1, NULL)) AS silverMedals, count(IF(medal = 'bronze', 1, NULL)) AS bronzeMedals, count(IF(medal != 'NA', 1, NULL)) AS totalMedals FROM events WHERE eventYear >= 2000 AND eventYear <=2000 GROUP BY noc ORDER BY totalMedals DESC, goldMedals DESC, silverMedals DESC", nativeQuery = true)
-    List<Event> adsd();
+    @Query("""
+            SELECT new com.npetrov.OlympicMedalists.model.MedalCount(
+                e.noc.noc,
+                e.noc.country,
+                e.noc.population,
+                count(IF(e.medal = 'Gold', 1, NULL)) AS goldMedals,
+                count(IF(e.medal = 'Silver', 1, NULL)) AS silverMedals,
+                count(IF(e.medal = 'Bronze', 1, NULL)) AS bronzeMedals,
+                count(IF(e.medal != 'NA', 1, NULL)) AS totalMedals
+            )
+            FROM Event AS e
+            WHERE e.eventYear>=?1 AND e.eventYear<=?2
+            GROUP BY e.noc ORDER BY totalMedals DESC
+            """)
+    List<MedalCount> countTotalMedals(int startYear, int endYear);
+
+    @Query("""
+            SELECT new com.npetrov.OlympicMedalists.model.MedalCount(
+                e.noc.noc,
+                e.noc.country,
+                e.noc.population,
+                count(IF(e.medal = 'Gold', 1, NULL)) AS goldMedals,
+                count(IF(e.medal = 'Silver', 1, NULL)) AS silverMedals,
+                count(IF(e.medal = 'Bronze', 1, NULL)) AS bronzeMedals,
+                count(IF(e.medal != 'NA', 1, NULL)) AS totalMedals
+            )
+            FROM Event AS e
+            WHERE e.eventYear>=?1 AND e.eventYear<=?2 AND e.season=?3
+            GROUP BY e.noc ORDER BY totalMedals DESC
+            """)
+    List<MedalCount> countTotalMedalsSeason(int startYear, int endYear, String season);
 
 }
