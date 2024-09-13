@@ -23,7 +23,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             )
             FROM Event AS e
             WHERE e.eventYear>=?1 AND e.eventYear<=?2
-            GROUP BY e.noc ORDER BY totalMedals DESC
+            GROUP BY e.noc ORDER BY totalMedals ASC
             """)
     List<MedalCount> countTotalMedals(int startYear, int endYear);
 
@@ -39,7 +39,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             )
             FROM Event AS e
             WHERE e.eventYear>=?1 AND e.eventYear<=?2 AND e.season=?3
-            GROUP BY e.noc ORDER BY totalMedals DESC
+            GROUP BY e.noc ORDER BY totalMedals ASC
             """)
     List<MedalCount> countTotalMedalsSeason(int startYear, int endYear, String season);
 

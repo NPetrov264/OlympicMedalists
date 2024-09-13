@@ -2,10 +2,8 @@ package com.npetrov.OlympicMedalists.controller;
 
 import com.npetrov.OlympicMedalists.model.Athlete;
 import com.npetrov.OlympicMedalists.repository.AthleteRepository;
+import com.npetrov.OlympicMedalists.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,37 +14,35 @@ import java.util.Optional;
 public class AthleteController {
     @Autowired
     private AthleteRepository athleteRepository;
+    @Autowired
+    private CountryRepository countryRepository;
 
-    @GetMapping("/top-athletes/sports")
+    @GetMapping("/sportList")
     @ResponseBody
     public List<String> findDistinctSports() {
          return athleteRepository.findDistinctSports();
     }
 
-    @GetMapping("/top-athletes-old")
+    @GetMapping("/countriesList")
     @ResponseBody
-    public Page<Athlete> findTopAthletesOld(
-            @RequestParam(name="page", required=false,  defaultValue = "0") int currentPage,
-            @RequestParam(name="sport", required=false,  defaultValue = "All") String sport
-    ) {
-        PageRequest pr = PageRequest.of(currentPage, 25,
-                Sort.by("medals").descending().and(Sort.by("goldMedals").descending()).and(Sort.by("silverMedals").descending()));
-        if (sport.equals("All")) {
-            return athleteRepository.findAllByMedalsGreaterThan(0, pr);
-        } else {
-            return athleteRepository.findBySportAndMedalsGreaterThan(sport, 0, pr);
-        }
+    public List<String> findDistinctCountries() {
+        return countryRepository.findDistinctCountries();
     }
 
     @GetMapping("/top-athletes")
     @ResponseBody
     public List<Athlete> findTopAthletes(
-            @RequestParam(name="sport", required=false,  defaultValue = "All") String sport
+            @RequestParam(name="sport", required=false,  defaultValue = "All") String sport,
+            @RequestParam(name="country", required=false,  defaultValue = "All") String country
     ) {
-        if (sport.equals("All")) {
+        if (sport.equals("All") && country.equals("All")) {
             return athleteRepository.findAllByMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(0);
+        } else if (country.equals("All")){
+            return athleteRepository.findBySportEqualsAndMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(sport, 0);
+        } else if (sport.equals("All")) {
+            return athleteRepository.findByTeamContainsAndMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(country, 0);
         } else {
-            return athleteRepository.findBySportContainingAndMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(sport, 0);
+            return athleteRepository.findByTeamContainingAndSportAndMedalsGreaterThanOrderByMedalsDescGoldMedalsDescSilverMedalsDesc(country, sport,0);
         }
     }
 }
