@@ -8,8 +8,10 @@ import Header from "../../components/Header";
 const TopAthletes = () => {
   const [data, setData] = useState([]);
   const [availableSports, setAvailableSports] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sport, setSport] = useState("All");
+  const [country, setCountry] = useState("All");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -17,9 +19,9 @@ const TopAthletes = () => {
     //{ field: "id", headerName: "ID" },
     {
       field: 'lineNo', headerName: '#', flex: 0.01, editable: false,
-      renderCell: (params) => params.api.getAllRowIds().indexOf(params.id)+1
+      renderCell: (params) => params.api.getAllRowIds().indexOf(params.id) + 1
     },
-    { field: "athleteName", headerName: "Name", flex: 1, cellClassName: "name-column--cell",},
+    { field: "athleteName", headerName: "Name", flex: 1, cellClassName: "name-column--cell", },
     { field: "sex", headerName: "sex", flex: .04 },
     { field: "noc", headerName: "noc", flex: .08 },
     { field: "team", headerName: "team", flex: .2 },
@@ -36,15 +38,20 @@ const TopAthletes = () => {
   }, []);
 
   useEffect(() => {
-    getData( sport);  // Fetch data when the component mounts or currentPage changes
-  }, [sport]);
+    getCountries();  // Get list of countries
+  }, []);
 
-  const getData = async (sport) => {
+  useEffect(() => {
+    getData(sport, country);  // Fetch data when the component mounts or currentPage changes
+  }, [sport, country]);
+
+  const getData = async (sport, country) => {
     setLoading(true);
     try {
-      const response = await api.get("/top-athletes", { params: { sport: sport } }); // Fetch data for the specified page
+      const response = await api.get("/top-athletes", { params: { sport: sport, country: country } }); // Fetch data for the specified page
       console.log(response.data);
       console.log(sport);
+      console.log(country);
       setData(response.data);
 
     } catch (error) {
@@ -55,18 +62,30 @@ const TopAthletes = () => {
 
   const getAvailableSports = async () => {
     try {
-      const response = await api.get("/top-athletes/sports"); // Get all the available sports
+      const response = await api.get("/sportList"); // Get all the available sports
       console.log(response.data);
-      setAvailableSports( response.data);
-      setAvailableSports( availableSports => ['All',...availableSports] );
+      setAvailableSports(response.data);
+      setAvailableSports(availableSports => ['All', ...availableSports]);
     } catch (error) {
       console.error('Failed to fetch sports:', error);
     }
   };
 
-  const handlePageChange = (newSport) => {
-    // Updates the data on sport change
+  const getCountries = async () => {
+    try {
+      const response = await api.get("/countriesList"); // Get all the available sports
+      console.log(response.data);
+      setCountries(response.data);
+      setCountries(countries => ['All', ...countries]);
+    } catch (error) {
+      console.error('Failed to fetch countries:', error);
+    }
+  };
+
+  const handlePageChange = (newSport, newCountry) => {
+    // Updates the data on sport or country change
     setSport(newSport);
+    setCountry(newCountry);
   };
 
   if (loading) {
@@ -77,22 +96,34 @@ const TopAthletes = () => {
       <Box sx={{ display: 'flex', justifyContent: "space-between" }}>
         <Header title="Top Athletes" subtitle="Best athletes from the modern olympics ordered by number of medals" />
 
-        {/* SPORT SELECT DROPDOWN MENU*/}
-        <Autocomplete
-          disablePortal
-          options={availableSports}
-          sx={{ width: 180 }}
-          renderInput={(params) => <TextField {...params} label="sport" />}
-          onChange={(event: any, newValue: string | null) => {
-            handlePageChange(newValue);
-          }}
-        />
+        <Box sx={{ display: 'flex', padding: "20px" }}>
+          {/* SPORT SELECT DROPDOWN MENU*/}
+          <Autocomplete
+            disablePortal
+            options={availableSports}
+            sx={{ width: 180 }}
+            renderInput={(params) => <TextField {...params} label="sport" />}
+            onChange={(event: any, newValue: string | null) => {
+              handlePageChange(newValue, country);
+            }}
+          />
+          {/* Country SELECT DROPDOWN MENU*/}
+          <Autocomplete
+            disablePortal
+            options={countries}
+            sx={{ width: 180 }}
+            renderInput={(params) => <TextField {...params} label="country" />}
+            onChange={(event: any, newValue: string | null) => {
+              handlePageChange(sport, newValue);
+            }}
+          />
+        </Box>
       </Box>
 
       {/* DATA GRID */}
       <Box
-        m="20px 0 0 0"
-        height="77vh"
+        m="10px 0 0 0"
+        height="79vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
