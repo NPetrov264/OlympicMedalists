@@ -131,7 +131,7 @@ const Sidebar = () => {
 
             <Item
               title="Total Medals"
-              to="/"
+              to="/medals"
               icon={<AlignHorizontalLeftOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

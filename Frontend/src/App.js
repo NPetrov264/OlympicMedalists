@@ -13,7 +13,7 @@ import Dashboard from './pages/dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './pages/Contact';
 import TopAthletes from './pages/topAthletes/topAthletes';
-import TopAthletesOld from './pages/topAthletes/TopAthletesOld';
+import MedalsBar from './pages/MedalsBar/MedalsBar';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -29,13 +29,13 @@ function App() {
                 <Topbar />
                 <Routes>
                   <Route path="/" element={<Dashboard/>}/>
+                  <Route path="/medals" element={<MedalsBar/>}/>
                   {/*<Route path="/contries" element={<Contries/>}/>
                   <Route path="/top-athletes" element={<TopAthletes/>}/>
                   <Route path="/geography" element={<Geography/>}/>
                   <Route path="/weight" element={<Weight/>}/>
                   <Route path="/height" element={<Height/>}/> */}
 
-                  <Route path="/top-athletes-old" element={<TopAthletesOld/>}/>
                   <Route path="/top-athletes" element={<TopAthletes/>}/>
                   <Route exact path="/contact" element={<Contact/>}/>
                 </Routes>
