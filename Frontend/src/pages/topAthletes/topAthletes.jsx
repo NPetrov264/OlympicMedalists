@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/axiosConfig"
-import { Box, useTheme, Autocomplete, TextField, Toolbar } from "@mui/material";
+import { Box, useTheme, Autocomplete, TextField } from "@mui/material";
 import { tokens } from "../../theme";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Header from "../../components/Header";
@@ -30,7 +30,7 @@ const TopAthletes = () => {
     { field: "goldMedals", headerName: "gold", flex: .06 },
     { field: "silverMedals", headerName: "silver", flex: .06 },
     { field: "bronzeMedals", headerName: "bronze", flex: .06 },
-    { field: "medals", headerName: "total medals", flex: .06, cellClassName: "medals-column--cell", },
+    { field: "medals", headerName: "total medals", flex: .1, cellClassName: "medals-column--cell", },
   ];
 
   useEffect(() => {
@@ -92,28 +92,30 @@ const TopAthletes = () => {
     return <div>Loading...</div>;
   }
   return (
-    <Box m="20px">
+    <Box className="Content-wrapper" p="20px 160px 0px 160px" height="92vh" overflow="auto" >
       <Box sx={{ display: 'flex', justifyContent: "space-between" }}>
-        <Header title="Top Athletes" subtitle="Best athletes from the modern olympics ordered by number of medals" />
+        <Header title="Top Athletes" subtitle="Best athletes from the modern olympics by total number of medals won" />
 
-        <Box sx={{ display: 'flex', padding: "20px" }}>
+        <Box sx={{ display: 'flex', padding: "20px 0 0 30px" }}>
           {/* SPORT SELECT DROPDOWN MENU*/}
           <Autocomplete
             disablePortal
+            value={sport}
             options={availableSports}
             sx={{ width: 180 }}
             renderInput={(params) => <TextField {...params} label="sport" />}
-            onChange={(event: any, newValue: string | null) => {
+            onChange={(event, newValue) => {
               handlePageChange(newValue, country);
             }}
           />
           {/* Country SELECT DROPDOWN MENU*/}
           <Autocomplete
             disablePortal
+            value={country}
             options={countries}
             sx={{ width: 180 }}
             renderInput={(params) => <TextField {...params} label="country" />}
-            onChange={(event: any, newValue: string | null) => {
+            onChange={(event, newValue) => {
               handlePageChange(sport, newValue);
             }}
           />
@@ -122,7 +124,6 @@ const TopAthletes = () => {
 
       {/* DATA GRID */}
       <Box
-        m="10px 0 0 0"
         height="79vh"
         sx={{
           "& .MuiDataGrid-root": {

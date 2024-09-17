@@ -8,9 +8,6 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [startYear, setStartyear] = useState("1896");
-  // const [endYear, setEndYear] = useState("2024");
-  // const [season, setSeason] = useState("Both");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -38,22 +35,17 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
     <ResponsiveBar
       data={data}
       theme={{
+        text: {
+          fill: colors.grey[200],
+          fontSize: 12
+        },
         axis: {
-          domain: {
-            // line: {
-            //   stroke: colors.grey[100]
-            // }
-          },
           legend: {
             text: {
               fill: colors.grey[100]
             }
           },
           ticks: {
-            // line: {
-            //   stroke: colors.grey[100],
-            //   strokeWidth: 1
-            // },
             text: {
               fill: colors.grey[100]
             }
@@ -63,6 +55,11 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
           text: {
             fill: colors.grey[100]
           }
+        },
+        tooltip: {
+          container: {
+            background: colors.primary[900]
+          }
         }
       }}
       keys={[
@@ -71,7 +68,8 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         'bronzeMedals',
       ]}
       indexBy="country"
-      margin={{ top: 0, right: 160, bottom: 50, left: 160 }}
+      height={data.length * 42}
+      margin={{ top: -20, right: 176, bottom: 50, left: 160 }}
       padding={0.3}
       layout="horizontal"
       valueScale={{ type: 'linear' }}
@@ -142,7 +140,7 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         modifiers: [
           [
             'darker',
-            1.6
+            2.4
           ]
         ]
       }}
@@ -152,14 +150,14 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
           anchor: 'top-right',
           direction: 'column',
           justify: false,
-          translateX: 60,
+          translateX: 20,
           translateY: 260,
-          itemsSpacing: 40,
-          itemWidth: 60,
+          itemsSpacing: 36,
+          itemWidth: 50,
           itemHeight: 14,
           itemDirection: 'left-to-right',
           itemOpacity: 0.85,
-          symbolSize: 30,
+          symbolSize: 32,
           effects: [
             {
               on: 'hover',
