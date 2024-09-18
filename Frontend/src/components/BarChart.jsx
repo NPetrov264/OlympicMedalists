@@ -68,7 +68,7 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         'bronzeMedals',
       ]}
       indexBy="country"
-      height={data.length * 42}
+      height={data.length * 38}
       margin={{ top: -20, right: 176, bottom: 50, left: 160 }}
       padding={0.3}
       layout="horizontal"
@@ -150,7 +150,7 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
           anchor: 'top-right',
           direction: 'column',
           justify: false,
-          translateX: 20,
+          translateX: -40,
           translateY: 260,
           itemsSpacing: 36,
           itemWidth: 50,
