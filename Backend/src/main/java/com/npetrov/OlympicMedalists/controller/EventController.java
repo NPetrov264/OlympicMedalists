@@ -1,15 +1,17 @@
 package com.npetrov.OlympicMedalists.controller;
 
 import com.npetrov.OlympicMedalists.model.Event;
+import com.npetrov.OlympicMedalists.model.Games;
 import com.npetrov.OlympicMedalists.model.MedalCount;
 import com.npetrov.OlympicMedalists.model.Sport;
 import com.npetrov.OlympicMedalists.repository.EventRepository;
+import com.npetrov.OlympicMedalists.repository.GamesRepository;
 import com.npetrov.OlympicMedalists.repository.SportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -19,9 +21,10 @@ public class EventController {
     private EventRepository eventRepository;
     @Autowired
     private SportRepository sportRepository;
+    @Autowired
+    private GamesRepository gamesRepository;
 
     @GetMapping("/sports")
-    @ResponseBody
     public List<Sport> getSports(){
         return sportRepository.findAllByOrderBySport();
     }
@@ -29,6 +32,11 @@ public class EventController {
     @GetMapping("/events")
     List<Event> getFirst100(){
         return eventRepository.findFirst100ByOrderById();
+    }
+
+    @GetMapping("/games")
+    List<Games> getGames() {
+        return gamesRepository.findAll(Sort.by( Sort.Direction.DESC,"id"));
     }
 
     @GetMapping("/medals")
