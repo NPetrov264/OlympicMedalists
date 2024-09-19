@@ -2,6 +2,7 @@ package com.npetrov.OlympicMedalists.repository;
 
 import com.npetrov.OlympicMedalists.model.Event;
 import com.npetrov.OlympicMedalists.model.MedalCount;
+import com.npetrov.OlympicMedalists.model.MedalsGeoData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,7 +24,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             )
             FROM Event AS e
             WHERE e.eventYear>=?1 AND e.eventYear<=?2
-            GROUP BY e.noc ORDER BY totalMedals ASC
+            GROUP BY e.noc
+            ORDER BY totalMedals ASC
             """)
     List<MedalCount> countTotalMedals(int startYear, int endYear);
 
@@ -39,8 +41,35 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             )
             FROM Event AS e
             WHERE e.eventYear>=?1 AND e.eventYear<=?2 AND e.season=?3
-            GROUP BY e.noc ORDER BY totalMedals ASC
+            GROUP BY e.noc
+            ORDER BY totalMedals ASC
             """)
     List<MedalCount> countTotalMedalsSeason(int startYear, int endYear, String season);
+
+    @Query("""
+            SELECT new com.npetrov.OlympicMedalists.model.MedalsGeoData(
+                e.noc.noc as id,
+                count(IF(e.medal != 'NA', 1, NULL)) AS data
+            )
+            FROM Event AS e
+            WHERE e.eventYear>=?1 AND e.eventYear<=?2
+            GROUP BY e.noc
+            ORDER BY data DESC
+            """)
+    List<MedalsGeoData> countTotalMedalsGeoData(int startYear, int endYear);
+
+    @Query("""
+            SELECT new com.npetrov.OlympicMedalists.model.MedalsGeoData(
+                e.noc.noc as id,
+                count(IF(e.medal != 'NA', 1, NULL)) AS data
+            )
+            FROM Event AS e
+            WHERE e.eventYear>=?1 AND e.eventYear<=?2 AND e.season=?3
+            GROUP BY e.noc
+            ORDER BY data DESC
+            """)
+    List<MedalsGeoData> countTotalMedalsSeasonGeoData(int startYear, int endYear, String season);
+
+
 
 }

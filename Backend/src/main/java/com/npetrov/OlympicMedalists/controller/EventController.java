@@ -1,9 +1,6 @@
 package com.npetrov.OlympicMedalists.controller;
 
-import com.npetrov.OlympicMedalists.model.Event;
-import com.npetrov.OlympicMedalists.model.Games;
-import com.npetrov.OlympicMedalists.model.MedalCount;
-import com.npetrov.OlympicMedalists.model.Sport;
+import com.npetrov.OlympicMedalists.model.*;
 import com.npetrov.OlympicMedalists.repository.EventRepository;
 import com.npetrov.OlympicMedalists.repository.GamesRepository;
 import com.npetrov.OlympicMedalists.repository.SportRepository;
@@ -40,7 +37,7 @@ public class EventController {
     }
 
     @GetMapping("/medals")
-    List<MedalCount> getAllEvents(
+    List<MedalCount> getMedalsByCountry(
         @RequestParam(name="startYear", required=false,  defaultValue = "1896") int startYear,
         @RequestParam(name="endYear", required=false,  defaultValue = "2024") int endYear,
         @RequestParam(name="season", required=false,  defaultValue = "Both") String season
@@ -49,6 +46,19 @@ public class EventController {
             return eventRepository.countTotalMedals(startYear, endYear);
         } else {
             return eventRepository.countTotalMedalsSeason(startYear, endYear, season);
+        }
+    }
+
+    @GetMapping("/total-medals-geo")
+    List<MedalsGeoData> getMedalsGeo(
+            @RequestParam(name="startYear", required=false,  defaultValue = "1896") int startYear,
+            @RequestParam(name="endYear", required=false,  defaultValue = "2024") int endYear,
+            @RequestParam(name="season", required=false,  defaultValue = "Both") String season
+    ){
+        if(season.equals("Both")) {
+            return eventRepository.countTotalMedalsGeoData(startYear, endYear);
+        } else {
+            return eventRepository.countTotalMedalsSeasonGeoData(startYear, endYear, season);
         }
     }
 
