@@ -137,16 +137,9 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Medals per Capita"
-              to="/"
+              title="Medals Map"
+              to="/medals-map"
               icon={<PublicOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Country Stats"
-              to="/"
-              icon={<FlagOutlinedIcon  />}
               selected={selected}
               setSelected={setSelected}
             />
