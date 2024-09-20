@@ -62,4 +62,8 @@ public class EventController {
         }
     }
 
+    @GetMapping("/participants")
+    List<Participants> getParticipants(){
+        return eventRepository.countParticipants();
+    }
 }

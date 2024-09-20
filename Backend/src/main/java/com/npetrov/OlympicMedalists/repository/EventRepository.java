@@ -3,6 +3,7 @@ package com.npetrov.OlympicMedalists.repository;
 import com.npetrov.OlympicMedalists.model.Event;
 import com.npetrov.OlympicMedalists.model.MedalCount;
 import com.npetrov.OlympicMedalists.model.MedalsGeoData;
+import com.npetrov.OlympicMedalists.model.Participants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -69,6 +70,17 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             ORDER BY data DESC
             """)
     List<MedalsGeoData> countTotalMedalsSeasonGeoData(int startYear, int endYear, String season);
+
+    @Query("""
+            SELECT new com.npetrov.OlympicMedalists.model.Participants(
+                count(e.sex = 'M') as male,
+                count(e.sex = 'F') as female
+            )
+            FROM Event AS e
+            GROUP BY e.eventYear
+            ORDER BY e.eventYear ASC
+            """)
+    List<Participants> countParticipants();
 
 
 
