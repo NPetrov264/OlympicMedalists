@@ -6,7 +6,7 @@ import { ResponsiveChoropleth } from "@nivo/geo";
 import { geoFeatures } from "../data/GeoFeatures";
 
 const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([0]);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -37,7 +37,7 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
       features={geoFeatures.features}
       margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
       colors="greens"
-      domain={[0, (season === "Summer") ? 260 : 100]}
+      domain={[0, (data === 0) ? 300 : data[0].value]}
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
@@ -51,6 +51,18 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
       borderColor="#152538"
       fillColor={colors.grey[100]}
       graticuleLineWidth={0.5}
+      theme={{
+        text: {
+          fillColor: colors.grey[100],
+          fill: colors.grey[100],
+          fontSize: 12
+        },
+        tooltip: {
+          container: {
+            background: colors.primary[900]
+          }
+        }
+      }}
       legends={
         isDashboard
           ? undefined
@@ -58,6 +70,7 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
             {
               anchor: 'bottom-left',
               direction: 'column',
+              label: 'label',
               justify: true,
               translateX: 20,
               translateY: -160,
@@ -65,7 +78,7 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
               itemWidth: 94,
               itemHeight: 18,
               itemDirection: 'left-to-right',
-              itemTextColor: '#444444',
+              itemTextColor: colors.grey[100],
               itemOpacity: 0.85,
               symbolSize: 18,
               effects: [
@@ -79,40 +92,6 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
               ]
             }
           ]}
-          defs={[
-            {
-                id: 'dots',
-                type: 'patternDots',
-                background: 'inherit',
-                color: '#38bcb2',
-                size: 4,
-                padding: 1,
-                stagger: true
-            },
-            {
-                id: 'lines',
-                type: 'patternLines',
-                background: 'inherit',
-                color: '#eed312',
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10
-            },
-            {
-                id: 'gradient',
-                type: 'linearGradient',
-                colors: [
-                    {
-                        offset: 0,
-                        color: '#000'
-                    },
-                    {
-                        offset: 100,
-                        color: 'inherit'
-                    }
-                ]
-            }
-        ]}
     />
   )
 }
