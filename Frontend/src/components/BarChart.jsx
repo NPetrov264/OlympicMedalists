@@ -69,7 +69,7 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
       ]}
       indexBy="country"
       height={data.length * 38}
-      margin={{ top: -20, right: 176, bottom: 50, left: 160 }}
+      margin={{ top: 0, right: 176, bottom: 50, left: 160 }}
       padding={0.3}
       layout="horizontal"
       valueScale={{ type: 'linear' }}
