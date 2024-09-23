@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 
-const BarChart = ({ startYear, endYear, season, reload }) => {
+const BarChartParticipants = ({ season }) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,14 +12,15 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    getData(startYear, endYear, season);  // Fetch data when the component mounts or currentPage changes
-  }, [reload]);
+    getData(season);  // Fetch data when the component mounts or currentPage changes
+  }, [season]);
 
-  const getData = async (startYear, endYear, season) => {
+  const getData = async (newSeason) => {
     setLoading(true);
     try {
-      const response = await api.get("/medals", { params: { startYear: startYear, endYear: endYear, season: season } }); // Fetch data for the specified page
+      const response = await api.get("/participants", { params: { season: newSeason } }); // Fetch participant data
       console.log(response.data);
+      console.log(newSeason)
       setData(response.data);
 
     } catch (error) {
@@ -63,20 +64,17 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         }
       }}
       keys={[
-        'goldMedals',
-        'silverMedals',
-        'bronzeMedals',
+        'male',
+        'female'
       ]}
-      indexBy="country"
-      height={data.length * 38}
-      margin={{ top: 0, right: 176, bottom: 50, left: 160 }}
+      indexBy="year"
+      margin={{ top: 50, right: 90, bottom: 50, left: 0 }}
       padding={0.3}
-      layout="horizontal"
+      layout="vertical"
+      label={(item) => `${((item.value / (data[item.index].male + data[item.index].female)) * 100).toFixed(0)}%`}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
-      //colors={{ scheme: 'nivo' }}
-      colors={['#f2da54', '#c8cdd1', '#e29542']}
-      fillOpacity={0.75}
+      colors={['#01A6EA', '#FFB1CB']}
       borderColor={{
         from: 'color',
         modifiers: [
@@ -87,8 +85,24 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         ]
       }}
       axisTop={null}
-      axisRight={null}
-      axisBottom={null}
+      axisRight={{
+        tickSize: 0,
+        tickPadding: 10,
+        tickRotation: 0,
+        legend: '',
+        legendPosition: 'middle',
+        legendOffset: 40,
+        truncateTickAt: 0
+      }}
+      axisBottom={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 25,
+        legend: '',
+        legendPosition: 'middle',
+        legendOffset: 32,
+        truncateTickAt: 0
+      }}
       axisLeft={{
         tickSize: 0,
         tickPadding: 10,
@@ -98,7 +112,6 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         legendOffset: 40,
         truncateTickAt: 0
       }}
-      enableGridY={false}
       enableTotals={true}
       labelSkipWidth={12}
       labelSkipHeight={12}
@@ -114,32 +127,24 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
       legends={[
         {
           dataFrom: 'keys',
-          anchor: 'top-right',
+          anchor: 'top-left',
           direction: 'column',
           justify: false,
-          translateX: -40,
-          translateY: 260,
-          itemsSpacing: 36,
+          translateX: 20,
+          translateY: 30,
+          itemsSpacing: 32,
           itemWidth: 50,
           itemHeight: 14,
           itemDirection: 'left-to-right',
-          itemOpacity: 0.85,
+          itemOpacity: 1,
           symbolSize: 32,
-          effects: [
-            {
-              on: 'hover',
-              style: {
-                itemOpacity: 1
-              }
-            }
-          ]
         }
       ]}
       role="application"
       ariaLabel="Nivo bar chart"
-      barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
+      barAriaLabel={e => e.id + ": " + e.formattedValue + " in year: " + e.indexValue}
     />
   )
 }
 
-export default BarChart;
+export default BarChartParticipants;
