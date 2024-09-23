@@ -4,17 +4,13 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Topbar from './pages/global/Topbar';
 import Sidebar from './pages/global/Sidebar';
 import Dashboard from './pages/dashboard';
-// import Contries from './pages/dashboard';
-// import TopAthletes from './pages/dashboard';
-// import Geography from './pages/dashboard';
-// import Weight from './pages/dashboard';
-// import Height from './pages/dashboard';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './pages/Contact';
-import TopAthletes from './pages/topAthletes/topAthletes';
-import MedalsBar from './pages/MedalsBar/MedalsBar';
-import Geography from './pages/Geography';
+import TopAthletes from './pages/ByAthlete/topAthletes';
+import MedalsBar from './pages/ByCountry/medalsBar';
+import Geography from './pages/ByCountry/georaphy';
+import Participants from './pages/ByAthlete/Participants';
+import AgeDistribution from './pages/ByAthlete/ageDistribution';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -33,11 +29,11 @@ function App() {
                   <Route path="/medals" element={<MedalsBar/>}/>
                   <Route path="/medals-map" element={<Geography/>}/>
                   <Route path="/top-athletes" element={<TopAthletes/>}/>
-                  {/*<Route path="/geography" element={<Geography/>}/>
-                  <Route path="/weight" element={<Weight/>}/>
-                  <Route path="/height" element={<Height/>}/> */}
+                  <Route path="/participants" element={<Participants/>}/>
+                  <Route path="/age-distribution" element={<AgeDistribution/>}/>
+                  <Route path="/weight-distribution" element={<AgeDistribution/>}/>
+                  <Route path="/height-distribution" element={<AgeDistribution/>}/>
 
-                  <Route path="/top-athletes" element={<TopAthletes/>}/>
                   <Route exact path="/contact" element={<Contact/>}/>
                 </Routes>
             </main>
