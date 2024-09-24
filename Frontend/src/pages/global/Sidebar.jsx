@@ -11,6 +11,8 @@ import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined
 import CalendarTodayOutlineIcon from '@mui/icons-material/CalendarTodayOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
 import HeightOutlinedIcon from '@mui/icons-material/HeightOutlined';
+import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
+import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -155,7 +157,7 @@ const Sidebar = () => {
             <Item
               title="Top Athletes"
               to="/top-athletes"
-              icon={<PeopleOutlineOutlinedIcon />}
+              icon={<WorkspacePremiumOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -183,7 +185,7 @@ const Sidebar = () => {
             <Item
               title="Height Distribution"
               to="/height-distribution"
-              icon={<HeightOutlinedIcon />}
+              icon={<StraightenOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
