@@ -14,6 +14,7 @@ import HeightOutlinedIcon from '@mui/icons-material/HeightOutlined';
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
 import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
+import AppsIcon from '@mui/icons-material/Apps';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -169,9 +170,9 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Age Distribution"
-              to="/age-distribution"
-              icon={<CalendarTodayOutlineIcon />}
+              title="Height-Weight Heatmap"
+              to="/height-weight-heatmap"
+              icon={<AppsIcon />}
               selected={selected}
               setSelected={setSelected}
             />

@@ -10,7 +10,7 @@ import TopAthletes from './pages/ByAthlete/topAthletes';
 import MedalsBar from './pages/ByCountry/medalsBar';
 import Geography from './pages/ByCountry/georaphy';
 import Participants from './pages/ByAthlete/Participants';
-import AgeDistribution from './pages/ByAthlete/ageDistribution';
+import HeightWeightHeatMap from './pages/ByAthlete/HeightWeightHeatMap';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -30,9 +30,9 @@ function App() {
                   <Route path="/medals-map" element={<Geography/>}/>
                   <Route path="/top-athletes" element={<TopAthletes/>}/>
                   <Route path="/participants" element={<Participants/>}/>
-                  <Route path="/age-distribution" element={<AgeDistribution/>}/>
-                  <Route path="/weight-distribution" element={<AgeDistribution/>}/>
-                  <Route path="/height-distribution" element={<AgeDistribution/>}/>
+                  <Route path="/height-weight-heatmap" element={<HeightWeightHeatMap/>}/>
+                  <Route path="/weight-distribution" element={<HeightWeightHeatMap/>}/>
+                  <Route path="/height-distribution" element={<HeightWeightHeatMap/>}/>
 
                   <Route exact path="/contact" element={<Contact/>}/>
                 </Routes>

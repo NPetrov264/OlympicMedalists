@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/axiosConfig"
 import { Autocomplete, Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import Header from "../../components/Header";
-import ScatterPlotAge from "../../components/ScatterPlotAge";
+import HeatMapHeightWeight from "../../components/HeatMapHeightWeight";
 
-const AgeDistribution = () => {
-  const [subtitle, setSubtitle] = useState("Number of participants in the olympic games for the period from 1896 to 2024");
+const HeightWeightHeatMap = () => {
+  const [subtitle, setSubtitle] = useState("Height Weight distribution for male athletes in gymnastics");
   const [sex, setSex] = useState("M");
   const [sport, setSport] = useState("Gymnastics");
   const [availableSports, setAvailableSports] = useState([]);
@@ -31,9 +31,10 @@ const AgeDistribution = () => {
   };
 
   const handlePageChange = (newSport, newSex) => {
-    // Updates the data on sport or country change
+    // Updates the data on sport change
     setSport(newSport);
     setSex(newSex);
+    setSubtitle("Height Weight distribution for " + newSport);
   };
 
   const handSexChange = (event) => {
@@ -43,24 +44,23 @@ const AgeDistribution = () => {
   return (
     <Box className="Content-wrapper" height="92vh" overflow="auto" >
       <Box p="20px 160px 0px 160px" sx={{ display: 'flex', justifyContent: "space-between" }}>
-        <Box sx={{ display: 'flex', justifyContent: "space-between" }}>
-          <Header title="Medal chart" subtitle={subtitle} />
-        </Box>
-        
-        <Box sx={{ display: 'flex', padding: "20px 0 0 30px" }}>
-            {/* SPORT SELECT DROPDOWN MENU*/}
-            <Autocomplete
-              disablePortal
-              value={sport}
-              options={availableSports}
-              sx={{ width: 180 }}
-              renderInput={(params) => <TextField {...params} label="sport" />}
-              onChange={(event, newValue) => {
-                handlePageChange(newValue, sex);
-              }}
-            />
+        <Header title="HeatMap" subtitle={subtitle} />
+
+        <Box sx={{ display: 'flex', padding: "0 0 0 30px" }}>
+
+          {/* SPORT SELECT DROPDOWN MENU*/}
+          <Box sx={{padding: "25px 0 0 0px" }}>
+          <Autocomplete
+            disablePortal
+            value={sport}
+            options={availableSports}
+            sx={{ width: 180 }}
+            renderInput={(params) => <TextField {...params} label="sport" />}
+            onChange={(event, newValue) => {
+              handlePageChange(newValue, sex);
+            }}
+          />
           </Box>
-          <Box m="0 0 0 30px" sx={{ display: 'flex' }} >
           {/* sex select radio buttons */}
           <FormControl sx={{ m: 2 }}>
             <FormLabel id="sport-radio-buttons-group">Gendder</FormLabel>
@@ -75,10 +75,9 @@ const AgeDistribution = () => {
             </RadioGroup>
           </FormControl>
         </Box>
-          
       </Box>
-      <Box height="72vh">
-        <ScatterPlotAge sport={sport} sex={sex} />
+      <Box p="0px 60px 0px 60px" height="72vh">
+        <HeatMapHeightWeight sport={sport} sex={sex} />
       </Box>
     </Box>
 
@@ -86,4 +85,4 @@ const AgeDistribution = () => {
   )
 }
 
-export default AgeDistribution;
+export default HeightWeightHeatMap;
