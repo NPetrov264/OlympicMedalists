@@ -6,10 +6,12 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Participants {
-    Long male;
-    Long female;
+    private Integer year;
+    private Long male;
+    private Long female;
 
-    public Participants(Long male, Long female) {
+    public Participants(Integer year, Long male, Long female) {
+        this.year = year;
         this.male = male;
         this.female = female;
     }
