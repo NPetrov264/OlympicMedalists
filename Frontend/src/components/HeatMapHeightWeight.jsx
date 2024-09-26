@@ -18,7 +18,7 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
 
   const getData = async (sport, sex) => {
     setLoading(true);
-    setNoData(true);
+    setNoData(false);
     try {
       const response = await api.get("/height-weight-heatmap", { params: { sport: sport, sex: sex } }); // Fetch data for the specified page
       console.log(response.data);
@@ -26,14 +26,12 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
 
     } catch (error) {
       console.error('Failed to fetch data:', error);
-      return <div >No Data</div>;
-
+      setNoData(true);
     }
     setLoading(false);
-    setNoData(false);
   };
 
-  if (noData){
+  if (noData) {
     return <div >No Data</div>;
   }
   if (loading) {
@@ -77,34 +75,21 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
           }
         }
       }}
-      margin={{ top: 80, right: 60, bottom: 70, left: 80 }}
+      margin={{ top: 10, right: 60, bottom: 70, left: 80 }}
       forceSquare={true}
-      axisTop={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: -90,
-        legend: 'weight in kg',
-        legendOffset: -50
-      }}
+      axisTop={null}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: -90,
+        tickRotation: -75,
         legend: 'weight in kg',
         legendOffset: 50
       }}
-      axisRight={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'height in cm',
-        legendPosition: 'middle',
-        legendOffset: 50
-      }}
+      axisRight={null}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: 0,
+        tickRotation: 2,
         legend: 'height in cm',
         legendPosition: 'middle',
         legendOffset: -50
@@ -117,27 +102,28 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
         steps: 10
       }}
       emptyColor={colors.primary[400]}
+      inactiveOpacity={0.5}
       borderWidth={1}
       borderColor={{ theme: 'grid.line.stroke' }}
       enableLabels={false}
       legends={[
         {
-            anchor: 'top-left',
-            translateX: 0,
-            translateY: -60,
-            length: 200,
-            thickness: 10,
-            direction: 'row',
-            tickPosition: 'after',
-            tickSize: 3,
-            tickSpacing: 4,
-            tickOverlap: false,
-            tickFormat: '>-.2s',
-            title: 'Value →',
-            titleAlign: 'start',
-            titleOffset: 4
+          anchor: 'bottom-right',
+          translateX: 40,
+          translateY: -60,
+          length: 200,
+          thickness: 10,
+          direction: 'column',
+          tickPosition: 'after',
+          tickSize: 3,
+          tickSpacing: 4,
+          tickOverlap: false,
+          tickFormat: '>-.2s',
+          title: 'Value →',
+          titleAlign: 'start',
+          titleOffset: 4
         }
-    ]}
+      ]}
       annotations={[]}
       hoverTarget="rowColumn"
     />

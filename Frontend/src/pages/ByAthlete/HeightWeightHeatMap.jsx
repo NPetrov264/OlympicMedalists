@@ -14,17 +14,11 @@ const HeightWeightHeatMap = () => {
     getAvailableSports();  // Get list of sports
   }, []);
 
-  const handleSportChange = (event) => {
-    setSport(event.target.value);
-    console.log(event.target.value);
-  };
-
   const getAvailableSports = async () => {
     try {
       const response = await api.get("/sportList"); // Get all the available sports
       console.log(response.data);
       setAvailableSports(response.data);
-      setAvailableSports(availableSports => ['All', ...availableSports]);
     } catch (error) {
       console.error('Failed to fetch sports:', error);
     }
@@ -63,25 +57,23 @@ const HeightWeightHeatMap = () => {
           </Box>
           {/* sex select radio buttons */}
           <FormControl sx={{ m: 2 }}>
-            <FormLabel id="sport-radio-buttons-group">Gendder</FormLabel>
+            {/* <FormLabel id="sex-select-radio-buttons-group">Gendder</FormLabel> */}
             <RadioGroup
-              aria-labelledby="sport-radio-buttons-group-label"
-              name="sport-buttons-group"
+              aria-labelledby="sex-select-radio-buttons-group-label"
+              name="sex-select-buttons-group"
               value={sex}
               onChange={handSexChange}
             >
-              <FormControlLabel value="M" control={<Radio />} label="male" />
-              <FormControlLabel value="F" control={<Radio />} label="female" />
+              <FormControlLabel value="M" control={<Radio size="small" />} label="male" />
+              <FormControlLabel value="F" control={<Radio size="small" />} label="female" />
             </RadioGroup>
           </FormControl>
         </Box>
       </Box>
-      <Box p="0px 60px 0px 60px" height="72vh">
+      <Box p="0px 60px 0px 60px" height="74vh" textAlign="center" >
         <HeatMapHeightWeight sport={sport} sex={sex} />
       </Box>
     </Box>
-
-
   )
 }
 
