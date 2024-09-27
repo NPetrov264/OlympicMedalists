@@ -1,9 +1,6 @@
 package com.npetrov.OlympicMedalists.controller;
 
-import com.npetrov.OlympicMedalists.model.Athlete;
-import com.npetrov.OlympicMedalists.model.HeatMapData;
-import com.npetrov.OlympicMedalists.model.HeightWeightData;
-import com.npetrov.OlympicMedalists.model.XYData;
+import com.npetrov.OlympicMedalists.model.*;
 import com.npetrov.OlympicMedalists.repository.AthleteRepository;
 import com.npetrov.OlympicMedalists.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +47,7 @@ public class AthleteController {
 
     @GetMapping("/height-weight-heatmap")
     @ResponseBody
-    List<HeatMapData> getAgeDistribution(
+    List<HeatMapData> getHeightWeightDistribution(
             @RequestParam(name="sport", required=false, defaultValue = "Gymnastics") String sport,
             @RequestParam(name="sex", required=false, defaultValue = "M") String sex
     ){
@@ -88,5 +85,16 @@ public class AthleteController {
         }
 
         return heatMap;
+    }
+
+    @GetMapping("/height-distribution")
+    @ResponseBody
+    List<SwarmPlotData> getHeightDistribution(
+            @RequestParam(name="sport1", required=false, defaultValue = "Gymnastics") String sport1,
+            @RequestParam(name="sport2", required=false, defaultValue = "Gymnastics") String sport2,
+            @RequestParam(name="sex1", required=false, defaultValue = "M") String sex1,
+            @RequestParam(name="sex2", required=false, defaultValue = "F") String sex2
+    ) {
+        return athleteRepository.get2SportHeigthWeightData(sport1, sport2, sex1, sex2);
     }
 }

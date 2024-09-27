@@ -2,6 +2,7 @@ package com.npetrov.OlympicMedalists.repository;
 
 import com.npetrov.OlympicMedalists.model.Athlete;
 import com.npetrov.OlympicMedalists.model.HeightWeightData;
+import com.npetrov.OlympicMedalists.model.SwarmPlotData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -28,4 +29,30 @@ public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
             ORDER BY a.height
             """)
     List<HeightWeightData> getHeightWeightData(String sport, String sex);
+
+    @Query("""
+            SELECT new com.npetrov.OlympicMedalists.model.SwarmPlotData(
+                a.athleteName,
+                IF(a.goldMedals > 0, 'champion', 'participant') as medalist,
+                CONCAT(a.sport,' ',a.sex),
+                a.height,
+                a.weight
+            )
+            FROM Athlete AS a
+            WHERE ((a.sport=?1 AND a.sex=?3) OR (a.sport=?2 AND a.sex=?4)) AND a.height IS NOT NULL
+            ORDER BY medalist DESC
+            """)
+    List<SwarmPlotData> get2SportHeigthWeightData(String sport1, String sport2, String sex1, String sex2);
+
+//    @Query("""
+//            SELECT new com.npetrov.OlympicMedalists.model.SwarmPlotData(
+//                IF(a.medals > 0, 'medalist', 'noMedals'),
+//                a.sport,
+//                a.weight,
+//                a.athleteName
+//            )
+//            FROM Athlete AS a
+//            WHERE ((a.sport=?1 AND a.sex=?3) OR (a.sport=?2 AND a.sex=?4)) AND a.weight IS NOT NULL
+//            """)
+//    List<SwarmPlotData> get2SporthWeightHeightData(String sport1, String sport2, String sex1, String sex2);
 }

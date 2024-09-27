@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -63,7 +63,11 @@ public class EventController {
     }
 
     @GetMapping("/participants")
-    List<Participants> getParticipants(){
-        return eventRepository.countParticipants();
+    List<Participants> getParticipants(
+            @RequestParam(name="season", required=true,  defaultValue = "Summer") String season
+
+    ){
+        return eventRepository.countParticipants(season);
     }
+
 }
