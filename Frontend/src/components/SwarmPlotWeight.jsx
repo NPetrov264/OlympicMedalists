@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { ResponsiveSwarmPlotCanvas } from "@nivo/swarmplot";
 
-const SwarmPlotHeight = React.memo(( {parameters} ) => {
+const SwarmPlotWeight = React.memo(( {parameters} ) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
   const getData = async (sport1, sport2, sex1, sex2) => {
     setLoading(true);
     try {
-      const response = await api.get("/height-distribution", { params: { sport1: sport1, sport2: sport2, sex1: sex1, sex2: sex2 } }); // Fetch data for the specified page
+      const response = await api.get("/weight-distribution", { params: { sport1: sport1, sport2: sport2, sex1: sex1, sex2: sex2 } }); // Fetch data for the specified page
       console.log(response.data);
       setData(response.data);
 
@@ -39,14 +39,14 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
         ""
       ]}
       identity="id"
-      value="height"
+      value="weight"
       valueFormat=".2f"
-      valueScale={{ type: 'linear', min: 126, max: 226, reverse: false }}
+      valueScale={{ type: 'linear', min: 25, max: 140, reverse: false }}
       // size={{
-      //   key: 'weight',
+      //   key: 'height',
       //   values: [
-      //     40,
-      //     150
+      //     130,
+      //     220
       //   ],
       //   sizes: [
       //     5,
@@ -79,7 +79,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
               border: '1px solid #ccc',
           }}
           >
-            <div>{node.data.name}: {node.value} cm, {node.data.weight} kg</div>
+            <div>{node.data.name}: {node.value} kg, {node.data.height} cm</div>
           </div>
         )
       }}
@@ -134,7 +134,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
         tickSize: 10,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'Height in cm',
+        legend: 'Weight in kg',
         legendPosition: 'middle',
         legendOffset: -76
       }}
@@ -143,4 +143,4 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
   )
 });
 
-export default SwarmPlotHeight;
+export default SwarmPlotWeight;

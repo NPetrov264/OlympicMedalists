@@ -2,15 +2,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import api from "../../api/axiosConfig"
 import { Autocomplete, Box, Button, MenuItem, Select, TextField } from "@mui/material";
 import Header from "../../components/Header";
-import SwarmPlotHeight from "../../components/SwarmPlotHeight";
+import SwarmPlotWeight from "../../components/SwarmPlotWeight";
 
-const HeightDistribution = () => {
+const WeightDistribution = () => {
 
-  const [subtitle, setSubtitle] = useState("Swarm plot comparing height distributions in Gymnastics and Tennis");
+  const [subtitle, setSubtitle] = useState("Swarm plot comparing weight distributions in Taekwondo and Rowing");
   const [sex1, setSex1] = useState("M");
   const [sex2, setSex2] = useState("M");
-  const [sport1, setSport1] = useState("Gymnastics");
-  const [sport2, setSport2] = useState("Tennis");
+  const [sport1, setSport1] = useState("Taekwondo");
+  const [sport2, setSport2] = useState("Rowing");
   const [reload, setReload] = useState(false);
   const [availableSports, setAvailableSports] = useState([]);
 
@@ -30,7 +30,7 @@ const HeightDistribution = () => {
 
   const handlePageChange = useMemo(() => {
     // Updates the data on reload
-    setSubtitle("Swarm plot comparing height distributions in " + sport1 + " and " + sport2);
+    setSubtitle("Swarm plot comparing weight distributions in " + sport1 + " and " + sport2);
     return [sport1, sport2, sex1, sex2];
   },[reload]);
 
@@ -53,7 +53,7 @@ const HeightDistribution = () => {
     <Box className="Content-wrapper" height="92vh" overflow="auto" >
       <Box p="20px" sx={{ display: 'flex', justifyContent: "center" }}>
         <Box maxWidth={"315px"}>
-          <Header title="Height distribution" subtitle={subtitle} />
+          <Header title="Weight distribution" subtitle={subtitle} />
         </Box>
         <Box m="0 0 0 30px" sx={{ display: 'flex' }} >
           <Box sx={{ width: 180, marginTop: 1 }}>
@@ -122,11 +122,11 @@ const HeightDistribution = () => {
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box height="82vh" width="800px">
-          <SwarmPlotHeight parameters={handlePageChange} />
+          <SwarmPlotWeight parameters={handlePageChange} />
         </Box>
       </Box>
     </Box>
   )
 }
 
-export default HeightDistribution;
+export default WeightDistribution;
