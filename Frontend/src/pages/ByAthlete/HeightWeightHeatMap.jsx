@@ -28,19 +28,22 @@ const HeightWeightHeatMap = () => {
     // Updates the data on sport change
     setSport(newSport);
     setSex(newSex);
-    setSubtitle("Height Weight distribution for " + newSport);
+    var sex = (newSex === "M")?"male":"female";
+    setSubtitle("Height Weight distribution for " + sex +" athletes in "+ newSport);
   };
 
   const handSexChange = (event) => {
     setSex(event.target.value);
+    var sex = (event.target.value === "M")?"male":"female";
+    setSubtitle("Height Weight distribution for " + sex +" athletes in "+ sport);
   };
 
   return (
     <Box className="Content-wrapper" height="92vh" overflow="auto" >
-      <Box p="20px 160px 0px 160px" sx={{ display: 'flex', justifyContent: "space-between" }}>
+      <Box p="20px 160px 0px 160px" sx={{ display: 'flex', justifyContent: "center" }}>
         <Header title="HeatMap" subtitle={subtitle} />
 
-        <Box sx={{ display: 'flex', padding: "0 0 0 30px" }}>
+        <Box sx={{ display: 'flex', padding: "0 0 0 50px" }}>
 
           {/* SPORT SELECT DROPDOWN MENU*/}
           <Box sx={{padding: "25px 0 0 0px" }}>

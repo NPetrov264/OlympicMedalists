@@ -43,7 +43,7 @@ const Geography = () => {
   return (
     <Box className="Content-wrapper" height="92vh" overflow="hidden" >
       <Box p="20px 160px 0px 160px" sx={{ display: 'flex', justifyContent: "space-between" }}>
-        <Header title="Medal chart" subtitle={subtitle} />
+        <Header title="Medal map" subtitle={subtitle} />
         <Box m="0 0 0 30px" sx={{ display: 'flex' }} >
 
           {/* Games SELECT DROPDOWN MENU*/}
