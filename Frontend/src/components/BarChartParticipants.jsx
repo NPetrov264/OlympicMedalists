@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 
-const BarChartParticipants = ({ season }) => {
+const BarChartParticipants = ({ season, isDashboard }) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -68,10 +68,10 @@ const BarChartParticipants = ({ season }) => {
         'female'
       ]}
       indexBy="year"
-      margin={{ top: 50, right: 90, bottom: 50, left: 0 }}
+      margin={{ top: 50, right: 60, bottom: 50, left: 0 }}
       padding={0.3}
       layout="vertical"
-      label={(item) => `${((item.value / (data[item.index].male + data[item.index].female)) * 100).toFixed(0)}%`}
+      label={isDashboard ? "" : (item) => `${((item.value / (data[item.index].male + data[item.index].female)) * 100).toFixed(0)}%`}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={['#01A6EA', '#FFB1CB']}
@@ -97,7 +97,7 @@ const BarChartParticipants = ({ season }) => {
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: 25,
+        tickRotation: isDashboard ? 75 : 25,
         legend: '',
         legendPosition: 'middle',
         legendOffset: 32,
@@ -112,7 +112,7 @@ const BarChartParticipants = ({ season }) => {
         legendOffset: 40,
         truncateTickAt: 0
       }}
-      enableTotals={true}
+      enableTotals={isDashboard? false : true}
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={{
@@ -132,12 +132,12 @@ const BarChartParticipants = ({ season }) => {
           justify: false,
           translateX: 20,
           translateY: 30,
-          itemsSpacing: 32,
+          itemsSpacing: isDashboard ? 10 : 32,
           itemWidth: 50,
           itemHeight: 14,
           itemDirection: 'left-to-right',
           itemOpacity: 1,
-          symbolSize: 32,
+          symbolSize: isDashboard ? 10 : 32,
         }
       ]}
       role="application"

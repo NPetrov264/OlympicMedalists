@@ -42,8 +42,8 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
       label="properties.name"
       valueFormat=".2s"
       projectionType="naturalEarth1"
-      projectionScale={isDashboard ? 50 : 260}
-      projectionTranslation={isDashboard ? [0.49, 0.6] : [0.5, 0.45]}
+      projectionScale={isDashboard ? 80 : 260}
+      projectionTranslation={isDashboard ? [0.49, 0.4] : [0.5, 0.45]}
       projectionRotation={[0, 0, 0]}
       enableGraticule={true}
       graticuleLineColor="#dddddd"

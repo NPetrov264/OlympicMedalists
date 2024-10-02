@@ -24,6 +24,9 @@ const Geography = () => {
       const response = await api.get("/games");
       console.log(response.data);
       setGames(response.data);
+      setGames(games => [{id: 57, eventYear: null, season: "Summer", city: 'Total'}, ...games]);
+      setGames(games => [{id: 58, eventYear: null, season: "Winter", city: 'Total'}, ...games]);
+      setGames(games => [{id: 59, eventYear: null, season: "Both", city: 'Total'}, ...games]);
     } catch (error) {
       console.error('Failed to fetch games:', error);
     }
@@ -33,9 +36,15 @@ const Geography = () => {
     if (newValue != null) {
       console.log(newValue);
       setSeason(newValue.season);
-      setStartYear(newValue.eventYear);
-      setEndYear(newValue.eventYear);
-      setSubtitle("Map of total number of medals per country for the " + newValue.eventYear + " " + newValue.season + " games in " + newValue.city);
+      if(newValue.city=="Total"){
+        setSubtitle("Total medals by country for the period from 1896 to 2024");
+        setStartYear(1896);
+        setEndYear(2024);
+      } else {
+        setSubtitle("Map of total number of medals per country for the " + newValue.eventYear + " " + newValue.season + " games in " + newValue.city);
+        setStartYear(newValue.eventYear);
+        setEndYear(newValue.eventYear);
+      }
       setReload(!reload)
     }
   };
@@ -58,7 +67,6 @@ const Geography = () => {
                   <Box
                     key={option.id}
                     component="li"
-                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                     {...optionProps}
                   >
                     {option.city} ({option.season}) {option.eventYear}

@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 
-const BarChart = ({ startYear, endYear, season, reload }) => {
+const BarChart = ({ startYear, endYear, season, reload, isDashboard }) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -68,8 +68,8 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
         'bronzeMedals',
       ]}
       indexBy="country"
-      height={data.length * 38}
-      margin={{ top: 0, right: 176, bottom: 50, left: 160 }}
+      height={isDashboard ? data.length * 24 : data.length * 38}
+      margin={isDashboard ? { top: -50, right: 40, bottom: 50, left: 100 } : { top: 0, right: 176, bottom: 50, left: 160 }}
       padding={0.3}
       layout="horizontal"
       valueScale={{ type: 'linear' }}
@@ -118,13 +118,13 @@ const BarChart = ({ startYear, endYear, season, reload }) => {
           direction: 'column',
           justify: false,
           translateX: -40,
-          translateY: 260,
-          itemsSpacing: 36,
+          translateY: isDashboard ? 180 : 260,
+          itemsSpacing: isDashboard ? 16 : 36,
           itemWidth: 50,
           itemHeight: 14,
           itemDirection: 'left-to-right',
           itemOpacity: 0.85,
-          symbolSize: 32,
+          symbolSize: isDashboard ? 24 : 32,
           effects: [
             {
               on: 'hover',

@@ -24,6 +24,7 @@ const MedalsBar = () => {
       const response = await api.get("/games");
       console.log(response.data);
       setGames(response.data);
+      setGames(games => [{id: 53, eventYear: null, season: "Both", city: 'Total'}, ...games]);
     } catch (error) {
       console.error('Failed to fetch games:', error);
     }
@@ -42,9 +43,15 @@ const MedalsBar = () => {
     if (newValue != null) {
       console.log(newValue);
       setSeason(newValue.season);
-      setStartYear(newValue.eventYear);
-      setEndYear(newValue.eventYear);
-      setSubtitle("Medals by country for the " + newValue.eventYear + " " + newValue.season + " games in " + newValue.city);
+      if(newValue.city=="Total"){
+        setSubtitle("Total medals by country for the period from 1896 to 2024");
+        setStartYear(1896);
+        setEndYear(2024);
+      } else {
+        setSubtitle("Medals by country for the " + newValue.eventYear + " " + newValue.season + " games in " + newValue.city);
+        setStartYear(newValue.eventYear);
+        setEndYear(newValue.eventYear);
+      }
       setReload(!reload)
     }
   };
