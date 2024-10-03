@@ -37,7 +37,7 @@ const BarChart = ({ startYear, endYear, season, reload, isDashboard }) => {
       theme={{
         text: {
           fill: colors.grey[200],
-          fontSize: 12
+          fontSize: isDashboard ? 11 : 13
         },
         axis: {
           legend: {
@@ -100,7 +100,7 @@ const BarChart = ({ startYear, endYear, season, reload, isDashboard }) => {
       }}
       enableGridY={false}
       enableTotals={true}
-      labelSkipWidth={12}
+      labelSkipWidth={14}
       labelSkipHeight={12}
       labelTextColor={{
         from: 'color',

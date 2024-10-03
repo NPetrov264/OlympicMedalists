@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { ResponsiveHeatMapCanvas } from "@nivo/heatmap";
 
-const HeatMapHeightWeight = ({ sport, sex }) => {
+const HeatMapHeightWeight = ({ sport, sex, isDashboard }) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
       theme={{
         text: {
           fill: colors.grey[200],
-          fontSize: 12
+          fontSize: isDashboard ? 6: 12
         },
         axis: {
           legend: {
@@ -61,7 +61,7 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
         },
         grid: {
           line: {
-            stroke: colors.grey[700]
+            stroke: colors.grey[900]
           }
         },
         legends: {
@@ -75,7 +75,7 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
           }
         }
       }}
-      margin={{ top: 10, right: 60, bottom: 70, left: 80 }}
+      margin={isDashboard ? { top: 20, right: 10, bottom: 80, left: 10 } : { top: 10, right: 60, bottom: 70, left: 80 }}
       forceSquare={true}
       axisTop={null}
       axisBottom={{
@@ -90,7 +90,7 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 2,
-        legend: 'height in cm',
+        legend: isDashboard ? "" : 'height in cm',
         legendPosition: 'middle',
         legendOffset: -50
       }}
@@ -106,24 +106,40 @@ const HeatMapHeightWeight = ({ sport, sex }) => {
       borderWidth={1}
       borderColor={{ theme: 'grid.line.stroke' }}
       enableLabels={false}
-      legends={[
-        {
-          anchor: 'bottom-right',
-          translateX: 40,
-          translateY: -60,
-          length: 200,
-          thickness: 10,
-          direction: 'column',
-          tickPosition: 'after',
-          tickSize: 3,
-          tickSpacing: 4,
-          tickOverlap: false,
-          tickFormat: '>-.2s',
-          title: 'Value →',
-          titleAlign: 'start',
-          titleOffset: 4
-        }
-      ]}
+      tooltip={(node) => {
+        return (
+          <div
+          style={{
+              background: colors.primary[900],
+              padding: '9px 12px',
+              border: '1px solid #ccc',
+          }}
+          >
+            <div>{node.cell.serieId} cm - {node.cell.data.x} kg: {node.cell.data.y}</div>
+          </div>
+        )
+      }}
+      legends={
+        isDashboard
+          ? undefined
+          : [
+            {
+              anchor: 'bottom-right',
+              translateX: 40,
+              translateY: -60,
+              length: 200,
+              thickness: 10,
+              direction: 'column',
+              tickPosition: 'after',
+              tickSize: 3,
+              tickSpacing: 4,
+              tickOverlap: false,
+              tickFormat: '>-.2s',
+              title: 'Value →',
+              titleAlign: 'start',
+              titleOffset: 4
+            }
+          ]}
       annotations={[]}
       hoverTarget="rowColumn"
     />
