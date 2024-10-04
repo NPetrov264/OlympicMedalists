@@ -8,12 +8,9 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AlignHorizontalLeftOutlinedIcon from '@mui/icons-material/AlignHorizontalLeftOutlined';
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined';
-import CalendarTodayOutlineIcon from '@mui/icons-material/CalendarTodayOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
-import HeightOutlinedIcon from '@mui/icons-material/HeightOutlined';
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
 import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
-import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import AppsIcon from '@mui/icons-material/Apps';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {

@@ -26,11 +26,6 @@ public class EventController {
         return sportRepository.findAllByOrderBySport();
     }
 
-    @GetMapping("/events")
-    List<Event> getFirst100(){
-        return eventRepository.findFirst100ByOrderById();
-    }
-
     @GetMapping("/games")
     List<Games> getGames() {
         return gamesRepository.findAll(Sort.by( Sort.Direction.DESC,"id"));

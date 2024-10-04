@@ -101,9 +101,9 @@ public class AthleteController {
     @GetMapping("/weight-distribution")
     @ResponseBody
     List<SwarmPlotData> getWeightDistribution(
-            @RequestParam(name="sport1", required=false, defaultValue = "Gymnastics") String sport1,
-            @RequestParam(name="sport2", required=false, defaultValue = "Gymnastics") String sport2,
-            @RequestParam(name="sex1", required=false, defaultValue = "M") String sex1,
+            @RequestParam(name="sport1", required=false, defaultValue = "Taekwondo") String sport1,
+            @RequestParam(name="sport2", required=false, defaultValue = "Rowing") String sport2,
+            @RequestParam(name="sex1", required=false, defaultValue = "F") String sex1,
             @RequestParam(name="sex2", required=false, defaultValue = "F") String sex2
     ) {
         return athleteRepository.get2SporthWeightData(sport1, sport2, sex1, sex2);

@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    List<Event> findFirst100ByOrderById();
-
     @Query("""
             SELECT new com.npetrov.OlympicMedalists.model.MedalCount(
                 e.noc.noc,
@@ -22,7 +20,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             )
             FROM Event AS e
             WHERE e.eventYear>=?1 AND e.eventYear<=?2
-            GROUP BY e.noc
+            GROUP BY e.noc HAVING count(IF(e.medal != 'NA', 1, NULL)) > 0
             ORDER BY totalMedals ASC
             """)
     List<MedalCount> countTotalMedals(int startYear, int endYear);
