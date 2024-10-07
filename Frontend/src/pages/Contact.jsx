@@ -19,7 +19,7 @@ const Contact = (() => {
           variant="outlined"
           color="primary"
           startIcon={<Email />}
-          href="mailto:npetrov@gmail.com"
+          href="mailto:n.petrov264@gmail.com"
         >
           Email
         </Button>

@@ -51,6 +51,7 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
       borderColor="#152538"
       fillColor={colors.grey[100]}
       graticuleLineWidth={0.5}
+      isInteractive={true}
       theme={{
         text: {
           fillColor: colors.grey[100],
