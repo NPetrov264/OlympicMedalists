@@ -19,7 +19,6 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
     setLoading(true);
     try {
       const response = await api.get("/height-distribution", { params: { sport1: sport1, sport2: sport2, sex1: sex1, sex2: sex2 } }); // Fetch data for the specified page
-      console.log(response.data);
       setData(response.data);
 
     } catch (error) {
@@ -67,6 +66,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
           ]
         ]
       }}
+      onClick={(node) => {navigator.clipboard.writeText(node.data.name)}}
       margin={{ top: 20, right: 100, bottom: 80, left: 100 }}
       enableGridX={false}
       enableGridY={true}
@@ -125,7 +125,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'group by sport, the darker dots show gold medalists',
+        legend: 'darker dots indicate gold medalists, on click copies athlete name to clipboard',
         legendPosition: 'middle',
         legendOffset: 46
       }}

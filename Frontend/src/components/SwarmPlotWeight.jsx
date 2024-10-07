@@ -23,7 +23,6 @@ const SwarmPlotWeight = React.memo(( {parameters, isDashboard} ) => {
     setLoading(true);
     try {
       const response = await api.get("/weight-distribution", { params: { sport1: sport1, sport2: sport2, sex1: sex1, sex2: sex2 } }); // Fetch data for the specified page
-      console.log(response.data);
       setData(response.data);
 
     } catch (error) {
@@ -71,6 +70,7 @@ const SwarmPlotWeight = React.memo(( {parameters, isDashboard} ) => {
           ]
         ]
       }}
+      onClick={(node) => {navigator.clipboard.writeText(node.data.name)}}
       margin={{ top: 20, right: 100, bottom: 80, left: 100 }}
       enableGridX={false}
       enableGridY={true}
@@ -129,7 +129,7 @@ const SwarmPlotWeight = React.memo(( {parameters, isDashboard} ) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'group by sport, the darker dots show gold medalists',
+        legend: 'darker dots indicate gold medalists, on click copies athlete name to clipboard',
         legendPosition: 'middle',
         legendOffset: 46
       }}
