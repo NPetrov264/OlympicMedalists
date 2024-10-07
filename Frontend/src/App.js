@@ -38,7 +38,7 @@ function App() {
                   <Route path="/height-distribution" element={<HeightDistribution/>}/>
 
                   <Route path="/search-results" element={<SearchResults/>}/>
-                  <Route exact path="/contact" element={<Contact/>}/>
+                  <Route path="/contact" element={<Contact/>}/>
                 </Routes>
             </main>
           </BrowserRouter>
