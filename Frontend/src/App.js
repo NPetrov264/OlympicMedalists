@@ -13,6 +13,7 @@ import Participants from './pages/ByAthlete/Participants';
 import HeightWeightHeatMap from './pages/ByAthlete/HeightWeightHeatMap';
 import HeightDistribution from './pages/ByAthlete/heightDistribution';
 import WeightDistribution from './pages/ByAthlete/weightDistribution';
+import SearchResults from './pages/SearchPage';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -36,6 +37,7 @@ function App() {
                   <Route path="/weight-distribution" element={<WeightDistribution/>}/>
                   <Route path="/height-distribution" element={<HeightDistribution/>}/>
 
+                  <Route path="/search-results" element={<SearchResults/>}/>
                   <Route exact path="/contact" element={<Contact/>}/>
                 </Routes>
             </main>
