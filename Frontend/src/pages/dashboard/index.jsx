@@ -12,6 +12,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link } from "react-router-dom";
 import HeatMapHeightWeight from "../../components/HeatMapHeightWeight";
 import SwarmPlotWeight from "../../components/SwarmPlotWeight";
+import SwarmPlotHeight from "../../components/SwarmPlotHeight";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -24,7 +25,7 @@ const Dashboard = () => {
         <Header title="The olympic games in numbers" subtitle="History of the olympic games from 1896 to 2016" />
 
         <Box>
-          <Button component={Link} to="https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results/data"
+          <Button component={Link} to="https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results/data" target="_blank"
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
@@ -158,7 +159,7 @@ const Dashboard = () => {
                 39,783
               </Typography>
             </Box>
-            <IconButton component={Link} to="/medals">
+            <IconButton component={Link} to="/medals" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
               <OpenInNewIcon
                 sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
               />
@@ -197,7 +198,7 @@ const Dashboard = () => {
               </Typography>
             </Box>
             <Box>
-              <IconButton component={Link} to="/participants">
+              <IconButton component={Link} to="/participants" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
                 <OpenInNewIcon
                   sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
                 />
@@ -238,7 +239,7 @@ const Dashboard = () => {
                 1,855
               </Typography>
             </Box>
-            <IconButton component={Link} to="/medals-map">
+            <IconButton component={Link} to="/medals-map" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
               <OpenInNewIcon
                 sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
               />
@@ -252,7 +253,7 @@ const Dashboard = () => {
         {/* ROW 3 */}
 
         <Box
-          gridColumn="span 4"
+          gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="hidden"
@@ -273,19 +274,23 @@ const Dashboard = () => {
                 Weight distribution comparison
               </Typography>
             </Box>
-            <IconButton component={Link} to="/weight-distribution">
+            <IconButton component={Link} to="/weight-distribution" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
               <OpenInNewIcon
                 sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
               />
             </IconButton>
           </Box>
           <Box height="100%" m="-20px 0 0 0">
-          <SwarmPlotWeight isDashboard={true} />
+          <img
+              alt="logo"
+              height="84%"
+              src="../assets/weight_dist.png"
+            />
           </Box>
         </Box>
 
         <Box
-          gridColumn="span 4"
+          gridColumn="span 3"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="hidden"
@@ -303,17 +308,54 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Height-weight heatmap
+                Weight distribution comparison
               </Typography>
-
             </Box>
-            <IconButton component={Link} to="/height-weight-heatmap">
+            <IconButton component={Link} to="/weight-distribution" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
               <OpenInNewIcon
                 sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
               />
             </IconButton>
           </Box>
           <Box height="100%" m="-20px 0 0 0">
+            <img
+              alt="logo"
+              height="84%"
+              src="../assets/height_dist.png"
+            />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 2"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          overflow="hidden"
+        >
+          <Box
+            mt="25px"
+            p="0 26px"
+            display="flex "
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box >
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Height-weight heatmap
+              </Typography>
+
+            </Box>
+            <IconButton component={Link} to="/height-weight-heatmap" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
+              <OpenInNewIcon
+                sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+              />
+            </IconButton>
+          </Box>
+          <Box height="98%" m="0px -10px 0 5px">
             <HeatMapHeightWeight isDashboard={true} />
           </Box>
 

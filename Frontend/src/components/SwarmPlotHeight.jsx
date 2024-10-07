@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { ResponsiveSwarmPlotCanvas } from "@nivo/swarmplot";
 
-const SwarmPlotHeight = React.memo(( {parameters} ) => {
+const SwarmPlotHeight = React.memo(( {parameters, isDashboard} ) => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,11 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    getData(parameters[0], parameters[1], parameters[2], parameters[3]);  // Fetch data when the component mounts or currentPage changes
+    if (isDashboard) {
+      getData();
+    } else {
+      getData(parameters[0], parameters[1], parameters[2], parameters[3]);  // Fetch data when the component mounts or currentPage changes
+    }
   }, [parameters]);
 
   const getData = async (sport1, sport2, sex1, sex2) => {
@@ -40,7 +44,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
       identity="id"
       value="height"
       valueFormat=".2f"
-      valueScale={{ type: 'linear', min: 126, max: 226, reverse: false }}
+      valueScale={isDashboard ? { type: 'linear', min: 150, max: 210, reverse: false } : { type: 'linear', min: 126, max: 226, reverse: false }}
       // size={{
       //   key: 'weight',
       //   values: [
@@ -52,7 +56,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
       //     9
       //   ]
       // }}
-      size={5}
+      size={isDashboard?2:5}
       spacing={1}
       simulationIterations={60}
       colors={["#94e2cd", "#3da58a"]}
@@ -91,7 +95,7 @@ const SwarmPlotHeight = React.memo(( {parameters} ) => {
         axis: {
           legend: {
             text: {
-              fontSize: 20,
+              fontSize: isDashboard ? 11 : 20,
               fill: colors.grey[200]
             }
           },
