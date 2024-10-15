@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/OlympicMedalists/static/css/main.98d33282.css",
+    "main.js": "/OlympicMedalists/static/js/main.2fe7c877.js",
+    "index.html": "/OlympicMedalists/index.html",
+    "main.98d33282.css.map": "/OlympicMedalists/static/css/main.98d33282.css.map",
+    "main.2fe7c877.js.map": "/OlympicMedalists/static/js/main.2fe7c877.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.98d33282.css",
+    "static/js/main.2fe7c877.js"
+  ]
+}
