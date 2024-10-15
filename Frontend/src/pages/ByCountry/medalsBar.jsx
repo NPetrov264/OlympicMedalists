@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/axiosConfig"
-import { Autocomplete, Box, Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import Header from "../../components/Header";
 import BarChart from "../../components/BarChart";
 
@@ -22,7 +22,6 @@ const MedalsBar = () => {
   const getGames = async () => {
     try {
       const response = await api.get("/games");
-      console.log(response.data);
       setGames(response.data);
       setGames(games => [{id: 53, eventYear: null, season: "Both", city: 'Total'}, ...games]);
     } catch (error) {
@@ -41,9 +40,8 @@ const MedalsBar = () => {
 
   const handleGamesChange = (newValue) => {
     if (newValue != null) {
-      console.log(newValue);
       setSeason(newValue.season);
-      if(newValue.city=="Total"){
+      if(newValue.city==="Total"){
         setSubtitle("Total medals by country for the period from 1896 to 2024");
         setStartYear(1896);
         setEndYear(2024);

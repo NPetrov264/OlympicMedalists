@@ -22,7 +22,6 @@ const Geography = () => {
   const getGames = async () => {
     try {
       const response = await api.get("/games");
-      console.log(response.data);
       setGames(response.data);
       setGames(games => [{id: 57, eventYear: null, season: "Summer", city: 'Total'}, ...games]);
       setGames(games => [{id: 58, eventYear: null, season: "Winter", city: 'Total'}, ...games]);
@@ -36,7 +35,7 @@ const Geography = () => {
     if (newValue != null) {
       console.log(newValue);
       setSeason(newValue.season);
-      if(newValue.city=="Total"){
+      if(newValue.city==="Total"){
         setSubtitle("Total medals by country for the period from 1896 to 2024");
         setStartYear(1896);
         setEndYear(2024);
