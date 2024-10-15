@@ -12,7 +12,6 @@ const Participants = () => {
 
   const handleSeasonChange = (event) => {
     setSeason(event.target.value);
-    console.log(event.target.value);
   };
 
   return (
