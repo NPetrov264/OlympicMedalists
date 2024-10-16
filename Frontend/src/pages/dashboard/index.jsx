@@ -11,8 +11,6 @@ import BarChartParticipants from "../../components/BarChartParticipants";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link } from "react-router-dom";
 import HeatMapHeightWeight from "../../components/HeatMapHeightWeight";
-import SwarmPlotWeight from "../../components/SwarmPlotWeight";
-import SwarmPlotHeight from "../../components/SwarmPlotHeight";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -261,7 +259,7 @@ const Dashboard = () => {
           <Box
             mt="25px"
             p="0 30px"
-            display="flex "
+            display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
@@ -285,6 +283,7 @@ const Dashboard = () => {
               alt="logo"
               height="84%"
               src="../assets/weight_dist.png"
+              style={{ width: "auto", height: "auto", maxHeight: "100%", maxWidth: "100%" }}
             />
           </Box>
         </Box>
@@ -298,7 +297,7 @@ const Dashboard = () => {
           <Box
             mt="25px"
             p="0 30px"
-            display="flex "
+            display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
@@ -308,20 +307,21 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Weight distribution comparison
+                Height distribution comparison
               </Typography>
             </Box>
-            <IconButton component={Link} to="/weight-distribution" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
+            <IconButton component={Link} to="/height-distribution" sx={{ minHeight: 0, minWidth: 0, padding: 0 }}>
               <OpenInNewIcon
                 sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
               />
             </IconButton>
           </Box>
-          <Box height="100%" m="-20px 0 0 0">
+          <Box height="100%" m="-20px 0 0 0" >
             <img
               alt="logo"
               height="84%"
               src="../assets/height_dist.png"
+              style={{ width: "auto", height: "auto", maxHeight: "100%", maxWidth: "100%" }}
             />
           </Box>
         </Box>
@@ -335,7 +335,7 @@ const Dashboard = () => {
           <Box
             mt="25px"
             p="0 26px"
-            display="flex "
+            display="flex"
             justifyContent="space-between"
             alignItems="center"
           >

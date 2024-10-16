@@ -52,6 +52,14 @@ const GeographyChart = ({ startYear, endYear, season, reload, isDashboard }) => 
       fillColor={colors.grey[100]}
       graticuleLineWidth={0.5}
       isInteractive={true}
+      onMouseEnter={() => {}}
+      onMouseMove={() => {}}
+      onMouseLeave={() => {}}
+      onClick={() => {}}
+      layers={['graticule', 'features']}
+      role=""
+      value={"value"}
+      match={"id"}
       theme={{
         text: {
           fillColor: colors.grey[100],
