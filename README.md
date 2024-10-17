@@ -4,8 +4,7 @@ This project is a full-stack RESTful application that provides some statistics a
 
 https://olympic-medalists.onrender.com
 
-<img src="./Frontend/public/assets/Dashboard.png" align="left" height="800">
-
+![Preview](./Frontend/public/assets/Dashboard.png)
 
 ## Features
 
